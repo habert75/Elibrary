@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function showUser(str) {
+  if (str=="") {
+    document.getElementById("txtHint").innerHTML="";
+    return;
+  } 
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else { // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET","getBook.php?q="+str,true);
+  xmlhttp.send();
+}
+</script>
+<style>
+body{
+background-color:gray;
+}
+</style>
+</head>
+<body>
+
+<form>
+<select name="users" onchange="showUser(this.value)">
+<option value="">Select a book:</option>
+<option value="1">master visual basic</option>
+<option value="2">How i play Golf</option>
+<option value="3">The 7 habits of highly efective people </option>
+<option value="4">Glenn Quagmire</option>
+</select>
+</form>
+<br>
+<div id="txtHint"><b>Book info will be listed here.</b></div>
+
+</body>
+</html>
